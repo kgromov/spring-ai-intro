@@ -23,15 +23,16 @@ public class OpenAIServiceImpl implements OpenAIService {
     private final ObjectMapper objectMapper;
 
     @Value("classpath:prompts/capital-prompt.st")
-    private Resource getCapitalPrompt;
+    private Resource capitalPrompt;
 
     @Value("classpath:prompts/capital-with-info.st")
-    private Resource getCapitalPromptWithInfo;
+    private Resource capitalPromptWithInfo;
 
     @Override
     public CapitalInfoResponse getCapitalWithInfo(CapitalRequest capitalRequest) {
         var parser = new BeanOutputParser<>(CapitalInfoResponse.class);
-        var promptTemplate = new PromptTemplate(getCapitalPrompt);
+//        var promptTemplate = new PromptTemplate(capitalPromptWithInfo);
+        var promptTemplate = new PromptTemplate(capitalPrompt);
         Prompt prompt = promptTemplate.create(
                 Map.of(
                         "stateOrCountry", capitalRequest.stateOrCountry(),
@@ -45,7 +46,7 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Override
     public CapitalResponse getCapital(CapitalRequest capitalRequest) {
         var parser = new BeanOutputParser<>(CapitalResponse.class);
-        var promptTemplate = new PromptTemplate(getCapitalPrompt);
+        var promptTemplate = new PromptTemplate(capitalPrompt);
         Prompt prompt = promptTemplate.create(
                 Map.of(
                         "stateOrCountry", capitalRequest.stateOrCountry(),
