@@ -1,34 +1,29 @@
 package guru.springframework.springaiintro.controllers;
 
 import guru.springframework.springaiintro.model.Answer;
-import guru.springframework.springaiintro.model.GetCapitalRequest;
-import guru.springframework.springaiintro.model.GetCapitalResponse;
+import guru.springframework.springaiintro.model.CapitalRequest;
+import guru.springframework.springaiintro.model.CapitalResponse;
 import guru.springframework.springaiintro.model.Question;
 import guru.springframework.springaiintro.services.OpenAIService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
 @RestController
+@RequiredArgsConstructor
 public class QuestionController {
 
     private final OpenAIService openAIService;
 
-    public QuestionController(OpenAIService openAIService) {
-        this.openAIService = openAIService;
-    }
-
     @PostMapping("/capitalWithInfo")
-    public Answer getCapitalWithInfo(@RequestBody GetCapitalRequest getCapitalRequest) {
-        return this.openAIService.getCapitalWithInfo(getCapitalRequest);
+    public Answer getCapitalWithInfo(@RequestBody CapitalRequest capitalRequest) {
+        return this.openAIService.getCapitalWithInfo(capitalRequest);
     }
 
     @PostMapping("/capital")
-    public GetCapitalResponse getCapital(@RequestBody GetCapitalRequest getCapitalRequest) {
-        return this.openAIService.getCapital(getCapitalRequest);
+    public CapitalResponse getCapital(@RequestBody CapitalRequest capitalRequest) {
+        return this.openAIService.getCapital(capitalRequest);
     }
 
     @PostMapping("/ask")
