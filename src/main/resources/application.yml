@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-ai-intro
+  ai:
+    mistralai:
+      api-key: ${GROQ_API_KEY}
+      base-url: "https://api.groq.com/openai/v1/chat/completions"
+#    ollama:
+#      base-url: "https://api.groq.com/openai/v1/chat/completions"
+#      embedding:
+#        enabled: false
+#      chat:
+#        model: llama3-8b-8192
+#        enabled: true
