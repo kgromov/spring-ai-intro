@@ -2,7 +2,7 @@ package guru.springframework.springaiintro.services;
 
 import guru.springframework.springaiintro.model.*;
 
-public interface OpenAIService {
+public interface AIService {
 
     CapitalInfoResponse getCapitalWithInfo(CapitalRequest capitalRequest);
 

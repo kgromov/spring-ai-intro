@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OpenAIServiceImplTest {
+class AIServiceImplTest {
 
     @Autowired
-    private OpenAIService openAIService;
+    private AIService AIService;
 
     @Test
     void getAnswer() {
-        String answer = openAIService.getAnswer("Create JSON for the following: There are 3 people, two males. " +
+        String answer = AIService.getAnswer("Create JSON for the following: There are 3 people, two males. " +
                 "One is named Mark. Another is named Joe. And a third person is a woman named Sam. The woman is age 20 " +
                 "and the two men are both 19.");
         System.out.println("Got the answer");

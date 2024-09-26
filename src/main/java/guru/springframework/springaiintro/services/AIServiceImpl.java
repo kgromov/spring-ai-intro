@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class OpenAIServiceImpl implements OpenAIService {
+public class AIServiceImpl implements AIService {
     private final ChatModel chatModel;
     private final ChatClient chatClient;
 
