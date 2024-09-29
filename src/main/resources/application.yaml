@@ -1,12 +1,27 @@
 spring:
   application:
     name: spring-ai-intro
+  threads:
+    virtual:
+      enabled: true
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: gpt-4o
+          model: gpt-4o-mini
       embedding:
         options:
           model: text-embedding-3-small
+  docker:
+    compose:
+      lifecycle-management: start_only
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
