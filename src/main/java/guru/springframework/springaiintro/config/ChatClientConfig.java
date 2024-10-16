@@ -1,5 +1,6 @@
 package guru.springframework.springaiintro.config;
 
+import guru.springframework.springaiintro.services.MetadataAdvisor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
@@ -19,9 +20,10 @@ public class ChatClientConfig {
     private Resource capitalPromptWithInfo;
 
     @Bean
-    ChatClient chatClient(ChatClient.Builder builder) {
+    ChatClient chatClient(ChatClient.Builder builder, MetadataAdvisor metadataAdvisor) {
         return builder
                 .defaultUser(capitalPrompt)
+                .defaultAdvisors(metadataAdvisor)
                 .build();
     }
 
