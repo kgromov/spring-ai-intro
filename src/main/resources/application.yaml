@@ -6,13 +6,11 @@ spring:
       enabled: true
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY}
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai
       chat:
         options:
-          model: gpt-4o-mini
-      embedding:
-        options:
-          model: text-embedding-3-small
+          model:  llama3-70b-8192
   docker:
     compose:
       lifecycle-management: start_only
