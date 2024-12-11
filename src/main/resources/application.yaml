@@ -5,14 +5,13 @@ spring:
     virtual:
       enabled: true
   ai:
-    openai:
-      api-key: ${OPENAI_API_KEY}
-      chat:
-        options:
-          model: gpt-4o-mini
-      embedding:
-        options:
-          model: text-embedding-3-small
+    azure:
+      openai:
+        api-key: ${GITHUB_TOKEN}
+        endpoint: "https://models.inference.ai.azure.com"
+        chat:
+          options:
+            model: gpt-4o
   docker:
     compose:
       lifecycle-management: start_only
@@ -25,9 +24,3 @@ management:
     web:
       exposure:
         include: '*'
-#  atlas:
-#    metrics:
-#      export:
-#        uri: http://localhost:7101/api/v1/publish
-#        enabled: true
-#        step: 10s
