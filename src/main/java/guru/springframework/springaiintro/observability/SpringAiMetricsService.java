@@ -1,6 +1,7 @@
 package guru.springframework.springaiintro.observability;
 
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import org.springframework.ai.chat.metadata.Usage;
@@ -15,8 +16,10 @@ public class SpringAiMetricsService {
 
     private final Counter requestTokens;
     private final Timer responseTimer;
+    private final MeterRegistry registry;
 
     public SpringAiMetricsService(MeterRegistry registry) {
+        this.registry = registry;
         //        Counter requestTokens = registry.counter("spring.ai.request_tokens");
         requestTokens = Counter.builder("spring.ai.request_tokens")
                 .description("Number of request tokens used")
@@ -34,5 +37,14 @@ public class SpringAiMetricsService {
 
     public void recordResponseTime(Instant startTime) {
         responseTimer.record(Duration.between(startTime, Instant.now()).toMillis(), TimeUnit.MILLISECONDS);
+    }
+
+    public double getTotalUsedTokens() {
+        Meter metric = registry.getMeters()
+                .stream()
+                .filter(m -> m.getId().getName().equals("gen_ai.client.token.usage"))
+                .findFirst()
+                .orElseThrow();
+        return ((Counter) metric).count();
     }
 }

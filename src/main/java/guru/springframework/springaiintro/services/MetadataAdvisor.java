@@ -3,6 +3,8 @@ package guru.springframework.springaiintro.services;
 import guru.springframework.springaiintro.observability.SpringAiMetricsService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.kgromov.PriceCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.advisor.api.AdvisedRequest;
@@ -10,6 +12,7 @@ import org.springframework.ai.chat.client.advisor.api.AdvisedResponse;
 import org.springframework.ai.chat.client.advisor.api.CallAroundAdvisor;
 import org.springframework.ai.chat.client.advisor.api.CallAroundAdvisorChain;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -25,6 +28,7 @@ public class MetadataAdvisor implements CallAroundAdvisor {
     private static final Logger logger = LoggerFactory.getLogger(MetadataAdvisor.class);
 
     private final SpringAiMetricsService metricsService;
+    private final PriceCalculator priceCalculator;
 
     @Getter
     private final Map<String, ChatResponseMetadata> metadataMap = new ConcurrentHashMap<>();
@@ -34,11 +38,13 @@ public class MetadataAdvisor implements CallAroundAdvisor {
         logger.debug("request: {}", DEFAULT_REQUEST_TO_STRING.apply(advisedRequest));
         var now = Instant.now();
         var advisedResponse = chain.nextAroundCall(advisedRequest);
-        logger.debug("response: {}", DEFAULT_RESPONSE_TO_STRING.apply(advisedResponse.response()));
-        var metadata = advisedResponse.response().getMetadata();
+        var chatResponse = advisedResponse.response();
+        logger.debug("response: {}", DEFAULT_RESPONSE_TO_STRING.apply(chatResponse));
+        var metadata = chatResponse.getMetadata();
         metricsService.recordResponseTime(now);
         metricsService.incrementRequestTokens(metadata.getUsage());
         metadataMap.put(metadata.getId(), metadata);
+        logger.info("Response cost = {} $", priceCalculator.calculate(chatResponse));
         return advisedResponse;
     }
 
