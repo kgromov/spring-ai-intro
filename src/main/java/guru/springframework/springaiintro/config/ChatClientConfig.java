@@ -1,7 +1,8 @@
 package guru.springframework.springaiintro.config;
 
-import guru.springframework.springaiintro.services.MetadataAdvisor;
 import lombok.RequiredArgsConstructor;
+import org.kgromov.observability.EnableMetadataObservabilityConfig;
+import org.kgromov.observability.MetadataAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.core.io.Resource;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableMetadataObservabilityConfig
 public class ChatClientConfig {
 
     @Value("classpath:prompts/capital-prompt.st")

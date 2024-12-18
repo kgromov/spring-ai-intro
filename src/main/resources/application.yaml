@@ -12,6 +12,9 @@ spring:
         chat:
           options:
             model: gpt-4o
+    metrics:
+      enabled: true
+
   docker:
     compose:
       lifecycle-management: start_only
@@ -24,3 +27,6 @@ management:
     web:
       exposure:
         include: '*'
+logging:
+  level:
+    org.kgromov.observability: debug
