@@ -18,6 +18,8 @@
     <properties>
         <java.version>23</java.version>
         <spring-ai.version>1.0.0-M4</spring-ai.version>
+<!--        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>-->
+        <maven.compiler.proc>full</maven.compiler.proc>
     </properties>
     <dependencies>
         <dependency>
@@ -89,6 +91,15 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
