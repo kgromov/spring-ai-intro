@@ -5,14 +5,23 @@ spring:
     virtual:
       enabled: true
   ai:
+    chat:
+      client:
+        enabled: false
     openai:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
           model: gpt-4o-mini
+#          model: deepseek-reasoner
       embedding:
         options:
           model: text-embedding-3-small
+    ollama:
+      chat:
+#        model: deepseek-r1:7b
+        model: llama3.2-vision
+
   docker:
     compose:
       lifecycle-management: start_only

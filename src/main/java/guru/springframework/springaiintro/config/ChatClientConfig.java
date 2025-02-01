@@ -4,6 +4,8 @@ import guru.springframework.springaiintro.services.MetadataAdvisor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,19 +21,30 @@ public class ChatClientConfig {
     @Value("classpath:prompts/capital-with-info.st")
     private Resource capitalPromptWithInfo;
 
+
     @Bean
-    ChatClient chatClient(ChatClient.Builder builder, MetadataAdvisor metadataAdvisor) {
-        return builder
+    public ChatClient.Builder openAiChatClientBuilder(OpenAiChatModel chatModel) {
+        return ChatClient.builder(chatModel);
+    }
+
+    @Bean
+    public ChatClient openAiChatClient(OpenAiChatModel chatModel, MetadataAdvisor metadataAdvisor) {
+        return  ChatClient.builder(chatModel)
                 .defaultUser(capitalPrompt)
                 .defaultAdvisors(metadataAdvisor)
                 .build();
     }
 
-    // More verbose version
-//    @Bean
-    ChatClient chatClient(ChatModel chatModel) {
-        return ChatClient.builder(chatModel)
+    @Bean
+    public ChatClient.Builder ollamaChatClientBuilder(OllamaChatModel chatModel) {
+        return ChatClient.builder(chatModel);
+    }
+
+    @Bean
+    public ChatClient ollamaChatClient(OllamaChatModel chatModel, MetadataAdvisor metadataAdvisor) {
+        return  ChatClient.builder(chatModel)
                 .defaultUser(capitalPrompt)
+                .defaultAdvisors(metadataAdvisor)
                 .build();
     }
 }

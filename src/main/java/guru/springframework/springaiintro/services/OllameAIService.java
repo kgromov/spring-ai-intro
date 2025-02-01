@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-@Profile({"openai", "api", "prod", "!ollama"})
-public class OpenAIService extends AiService {
+@Profile({"ollama", "local", "default", "dev", "!openai"})
+public class OllameAIService extends AiService {
 
-    public OpenAIService(@Qualifier("openAiChatClientBuilder") ChatClient.Builder builder,
-                         @Qualifier("openAiChatClient") ChatClient chatClient) {
+    public OllameAIService(@Qualifier("ollamaChatClientBuilder") ChatClient.Builder builder,
+                           @Qualifier("ollamaChatClient") ChatClient chatClient) {
         super(builder, chatClient);
     }
 }
