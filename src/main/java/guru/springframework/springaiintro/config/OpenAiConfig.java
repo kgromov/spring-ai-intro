@@ -11,8 +11,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
-//@Profile("openai")
-@Profile({"openai", "!ollama"})
+@Profile({"openai", "deepseek"})
 @Configuration
 @Import(OpenAiAutoConfiguration.class)
 public class OpenAiConfig {

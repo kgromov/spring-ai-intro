@@ -1,10 +1,11 @@
 package guru.springframework.springaiintro.config;
 
 import guru.springframework.springaiintro.services.MetadataAdvisor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.ai.autoconfigure.ollama.OllamaAutoConfiguration;
+import org.springframework.ai.autoconfigure.azure.openai.AzureOpenAiAutoConfiguration;
+import org.springframework.ai.autoconfigure.openai.OpenAiAutoConfiguration;
+import org.springframework.ai.azure.openai.AzureOpenAiChatModel;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,26 +13,22 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
-@Profile({"ollama", "deepseek"})
+@Profile({"azure", "default"})
 @Configuration
-@Import(OllamaAutoConfiguration.class)
-@RequiredArgsConstructor
-public class OllamaConfig {
+@Import(AzureOpenAiAutoConfiguration.class)
+public class AzureConfig {
 
     @Value("classpath:prompts/capital-prompt.st")
     private Resource capitalPrompt;
 
-    @Value("classpath:prompts/capital-with-info.st")
-    private Resource capitalPromptWithInfo;
-
     @Bean
-    public ChatClient.Builder ollamaChatClientBuilder(OllamaChatModel chatModel) {
+    public ChatClient.Builder azureChatClientBuilder(AzureOpenAiChatModel chatModel) {
         return ChatClient.builder(chatModel);
     }
 
     @Bean
-    public ChatClient ollamaChatClient(OllamaChatModel chatModel, MetadataAdvisor metadataAdvisor) {
-        return  ChatClient.builder(chatModel)
+    public ChatClient azureChatClient(AzureOpenAiChatModel chatModel, MetadataAdvisor metadataAdvisor) {
+        return ChatClient.builder(chatModel)
                 .defaultUser(capitalPrompt)
                 .defaultAdvisors(metadataAdvisor)
                 .build();

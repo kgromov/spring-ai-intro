@@ -8,9 +8,6 @@ spring:
     chat:
       client:
         enabled: false
-    ollama:
-      chat:
-        model: llama3.2-vision
 
   docker:
     compose:
