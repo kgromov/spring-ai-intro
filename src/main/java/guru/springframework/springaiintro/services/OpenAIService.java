@@ -1,14 +1,12 @@
 package guru.springframework.springaiintro.services;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
-@Profile({"openai", "api", "prod", "!ollama"})
+@Profile("openai")
 public class OpenAIService extends AiService {
 
     public OpenAIService(@Qualifier("openAiChatClientBuilder") ChatClient.Builder builder,

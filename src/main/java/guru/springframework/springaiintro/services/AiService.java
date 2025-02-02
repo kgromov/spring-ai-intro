@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 
 public abstract class AiService {
-    private static final Logger log = LoggerFactory.getLogger(AiService.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     protected final ChatClient.Builder builder;
     protected final ChatClient chatClient;
 
@@ -15,8 +15,8 @@ public abstract class AiService {
         this.chatClient = chatClient;
     }
 
-
     public CapitalInfoResponse getCapitalWithInfo(CapitalRequest capitalRequest) {
+        log.info("Requesting capital with extended info for {}", capitalRequest.stateOrCountry());
         return chatClient.prompt()
                 .user(up -> up.param("stateOrCountry", capitalRequest.stateOrCountry()))
                 .call()
@@ -24,6 +24,7 @@ public abstract class AiService {
     }
 
     public CapitalResponse getCapital(CapitalRequest capitalRequest) {
+        log.info("Requesting capital for {}", capitalRequest.stateOrCountry());
         return chatClient.prompt()
                 .user(up -> up.param("stateOrCountry", capitalRequest.stateOrCountry()))
                 .call()
@@ -31,12 +32,13 @@ public abstract class AiService {
     }
 
     public Answer getAnswer(Question question) {
+        log.info("Answering question: {}", question.question());
         String answer = this.getAnswer(question.question());
         return new Answer(answer);
     }
 
     public String getAnswer(String question) {
-        log.info("I was called");
+        log.info("Answering question: {}", question);
         return builder
                 .build()
                 .prompt()

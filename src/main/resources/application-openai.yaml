@@ -1,0 +1,11 @@
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+#          model: deepseek-reasoner
+      embedding:
+        options:
+          model: text-embedding-3-small
