@@ -2,7 +2,7 @@ package guru.springframework.springaiintro.config;
 
 import lombok.RequiredArgsConstructor;
 import org.kgromov.observability.EnableMetadataObservabilityConfig;
-import org.kgromov.observability.MetadataAdvisor;
+import org.kgromov.observability.ChatMetadataAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,7 @@ public class ChatClientConfig {
     private Resource capitalPromptWithInfo;
 
     @Bean
-    ChatClient chatClient(ChatClient.Builder builder, MetadataAdvisor metadataAdvisor) {
+    ChatClient chatClient(ChatClient.Builder builder, ChatMetadataAdvisor metadataAdvisor) {
         return builder
                 .defaultUser(capitalPrompt)
                 .defaultAdvisors(metadataAdvisor)
