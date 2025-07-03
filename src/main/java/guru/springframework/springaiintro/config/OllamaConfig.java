@@ -2,8 +2,8 @@ package guru.springframework.springaiintro.config;
 
 import guru.springframework.springaiintro.services.MetadataAdvisor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ai.autoconfigure.ollama.OllamaAutoConfiguration;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.model.ollama.autoconfigure.OllamaChatAutoConfiguration;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 
 @Profile({"ollama", "deepseek"})
 @Configuration
-@Import(OllamaAutoConfiguration.class)
+@Import(OllamaChatAutoConfiguration.class)
 @RequiredArgsConstructor
 public class OllamaConfig {
 

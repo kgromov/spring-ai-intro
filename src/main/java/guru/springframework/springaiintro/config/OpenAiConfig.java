@@ -1,8 +1,8 @@
 package guru.springframework.springaiintro.config;
 
 import guru.springframework.springaiintro.services.MetadataAdvisor;
-import org.springframework.ai.autoconfigure.openai.OpenAiAutoConfiguration;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import org.springframework.core.io.Resource;
 
 @Profile({"openai", "deepseek", "gemini"})
 @Configuration
-@Import(OpenAiAutoConfiguration.class)
+@Import(OpenAiChatAutoConfiguration.class)
 public class OpenAiConfig {
 
     @Value("classpath:prompts/capital-prompt.st")
