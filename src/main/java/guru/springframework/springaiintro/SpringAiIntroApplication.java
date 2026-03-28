@@ -1,5 +1,6 @@
 package guru.springframework.springaiintro;
 
+import org.springframework.ai.model.anthropic.autoconfigure.AnthropicChatAutoConfiguration;
 import org.springframework.ai.model.azure.openai.autoconfigure.AzureOpenAiAudioTranscriptionAutoConfiguration;
 import org.springframework.ai.model.azure.openai.autoconfigure.AzureOpenAiChatAutoConfiguration;
 import org.springframework.ai.model.azure.openai.autoconfigure.AzureOpenAiEmbeddingAutoConfiguration;
@@ -25,8 +26,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         AzureOpenAiEmbeddingAutoConfiguration.class,
 
         OllamaChatAutoConfiguration.class,
-        OllamaEmbeddingAutoConfiguration.class
+        OllamaEmbeddingAutoConfiguration.class,
 //        OllamaApiAutoConfiguration.class
+
+        AnthropicChatAutoConfiguration.class
 })
 public class SpringAiIntroApplication {
 

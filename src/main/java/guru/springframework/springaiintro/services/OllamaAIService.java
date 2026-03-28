@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile({"ollama", "deepseek"})
-public class OllameAIService extends AiService {
+public class OllamaAIService extends AiService {
 
-    public OllameAIService(@Qualifier("ollamaChatClientBuilder") ChatClient.Builder builder,
+    public OllamaAIService(@Qualifier("ollamaChatClientBuilder") ChatClient.Builder builder,
                            @Qualifier("ollamaChatClient") ChatClient chatClient) {
         super(builder, chatClient);
     }
