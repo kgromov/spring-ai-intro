@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
 
 
 @Profile("anthropic")
@@ -31,5 +33,13 @@ public class AnthropicConfig {
                 .defaultUser(capitalPrompt)
                 .defaultAdvisors(metadataAdvisor)
                 .build();
+    }
+
+    @Bean
+    public RestClient.Builder restClientBuilder() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(30_000);  // 30 seconds
+        factory.setReadTimeout(600_000);    // 10 minutes
+        return RestClient.builder().requestFactory(factory);
     }
 }
