@@ -7,3 +7,4 @@ spring:
         chat:
           options:
             model: gpt-4o
+#            model: gpt-5-mini  # It's a shame but com.azure:azure-ai-openai latest (1.0.0-beta-16) still doesn't support gpt-5*
