@@ -1,5 +1,7 @@
 package guru.springframework.springaiintro.config;
 
+import com.azure.ai.openai.OpenAIClient;
+import com.azure.identity.DefaultAzureCredentialBuilder;
 import guru.springframework.springaiintro.services.MetadataAdvisor;
 import org.springframework.ai.azure.openai.AzureOpenAiChatModel;
 import org.springframework.ai.chat.client.ChatClient;
