@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile({"ollama", "deepseek"})
+@Profile({"ollama"})
 public class OllamaAIService extends AiService {
 
     public OllamaAIService(@Qualifier("ollamaChatClientBuilder") ChatClient.Builder builder,

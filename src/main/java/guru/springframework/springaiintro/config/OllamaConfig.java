@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
-@Profile({"ollama", "deepseek"})
+@Profile({"ollama"})
 @Configuration
 @Import(OllamaChatAutoConfiguration.class)
 @RequiredArgsConstructor

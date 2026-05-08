@@ -1,0 +1,11 @@
+spring:
+  ai:
+    openai:
+      api-key: lm-studio
+      base-url: http://127.0.0.1:1234
+      chat:
+        options:
+          model: google/gemma-4-e4b
+      embedding:
+        options:
+          model: text-embedding-nomic-embed-text-v1.5

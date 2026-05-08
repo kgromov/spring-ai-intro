@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
-@Profile({"openai", "deepseek", "gemini"})
+@Profile({"openai", "lm-studio",  "gemini"})
 @Configuration
 @Import(OpenAiChatAutoConfiguration.class)
 public class OpenAiConfig {

@@ -5,7 +5,6 @@ spring:
       chat:
         options:
           model: gpt-4o-mini
-#          model: deepseek-reasoner
       embedding:
         options:
           model: text-embedding-3-small
