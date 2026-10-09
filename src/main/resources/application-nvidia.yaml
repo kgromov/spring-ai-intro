@@ -1,0 +1,14 @@
+spring:
+  ai:
+    openai:
+      # spring-ai docs says it's enough but it doesn't work (and base-url is https://integrate.api.nvidia.com)
+      api-key: ${NVIDIA_API_KEY}
+      base-url: https://integrate.api.nvidia.com/v1
+      chat:
+        options:
+          api-key: ${NVIDIA_API_KEY}
+          base-url: https://integrate.api.nvidia.com/v1
+        model: nvidia/nemotron-3.5-lightning-30b-a3b          # text-to-text; tools calling; structured output; reasoning
+      #        model:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning  # video, audio, image, text; reasoning; tools calling;
+      embedding:
+        model: nemotron-3-embed-1b
